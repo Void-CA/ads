@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        nav {
+            width: 100%;
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input, select, button {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/visualize">Ver Datos Guardados</a>
+    </nav>
+    <h1>Formulario de Registro</h1>
+    <form action="/submit" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        
+        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+        
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="alumno">Alumno</option>
+            <option value="profesor">Profesor</option>
+        </select>
+        
+        <div id="alumno_fields" class="hidden">
+            <label for="carnet">Carnet:</label>
+            <input type="text" id="carnet" name="carnet">
+        </div>
+        
+        <div id="profesor_fields" class="hidden">
+            <label for="id_profesor">ID Profesor:</label>
+            <input type="text" id="id_profesor" name="id_profesor">
+            
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo">
+            
+            <label for="jefatura">Jefatura:</label>
+            <input type="text" id="jefatura" name="jefatura">
+            
+            <label for="contrato">Contrato:</label>
+            <input type="text" id="contrato" name="contrato">
+        </div>
+        
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        document.getElementById('tipo').addEventListener('change', function () {
+            var alumnoFields = document.getElementById('alumno_fields');
+            var profesorFields = document.getElementById('profesor_fields');
+            if (this.value === 'alumno') {
+                alumnoFields.classList.remove('hidden');
+                profesorFields.classList.add('hidden');
+            } else if (this.value === 'profesor') {
+                alumnoFields.classList.add('hidden');
+                profesorFields.classList.remove('hidden');
+            } else {
+                alumnoFields.classList.add('hidden');
+                profesorFields.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
